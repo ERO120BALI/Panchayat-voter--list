@@ -1,136 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Panchayat Voter List</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial;
-      background:#f4f6f9;
-      margin:0;
-      padding:20px;
-    }
-    h1 {
-      text-align:center;
-    }
-    input {
-      width:100%;
-      padding:10px;
-      margin-bottom:15px;
-      border-radius:6px;
-      border:1px solid #ccc;
-    }
-    ul {
-      list-style:none;
-      padding:0;
-    }
-    li {
-      margin:6px 0;
-    }
-    a {
-      display:block;
-      padding:10px;
-      background:#ffffff;
-      text-decoration:none;
-      color:black;
-      border-radius:6px;
-      box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    }
-    a:hover {
-      background:#e6f2ff;
-    }
-  </style>
+<title>Panchayat Voter List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: Arial; background:#f4f6f9; padding:20px; }
+h1 { text-align:center; }
+input { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; }
+.panchayat { background:#fff; padding:10px; margin:6px 0; border-radius:6px; cursor:pointer; }
+.wards { margin-left:15px; margin-bottom:10px; display:none; }
+.wards a { display:block; padding:5px; text-decoration:none; color:blue; }
+</style>
 </head>
 <body>
 
 <h1>Panchayat Voter List</h1>
-
 <input type="text" id="search" placeholder="Search Panchayat..." onkeyup="filterList()">
 
-<ul id="panchayatList">
-
-<li><a href="Amliya/">Amliya</a></li>
-<li><a href="Barawal/">Barawal</a></li>
-<li><a href="Barwa/">Barwa</a></li>
-<li><a href="Bedal/">Bedal</a></li>
-<li><a href="Beejapur/">Beejapur</a></li>
-<li><a href="Beesalpur/">Beesalpur</a></li>
-<li><a href="Bera/">Bera</a></li>
-<li><a href="Berdi/">Berdi</a></li>
-<li><a href="Bhagala Khuna/">Bhagala Khuna</a></li>
-<li><a href="Bhandar/">Bhandar</a></li>
-<li><a href="Bharla/">Bharla</a></li>
-<li><a href="Bhatoond/">Bhatoond</a></li>
-<li><a href="Bheemana/">Bheemana</a></li>
-<li><a href="Bheetwara/">Bheetwara</a></li>
-<li><a href="Boya/">Boya</a></li>
-<li><a href="Chamunderi Ranawatan/">Chamunderi Ranawatan</a></li>
-<li><a href="Dantiwada/">Dantiwada</a></li>
-<li><a href="Dhani/">Dhani</a></li>
-<li><a href="Doodni/">Doodni</a></li>
-<li><a href="Falna Gaon/">Falna Gaon</a></li>
-<li><a href="Gordhanpura/">Gordhanpura</a></li>
-<li><a href="Goriya/">Goriya</a></li>
-<li><a href="Guralas/">Guralas</a></li>
-<li><a href="Joona Beda/">Joona Beda</a></li>
-<li><a href="Kakradi/">Kakradi</a></li>
-<li><a href="Kheemel/">Kheemel</a></li>
-<li><a href="Khetarli/">Khetarli</a></li>
-<li><a href="Kolwada/">Kolwada</a></li>
-<li><a href="Kooran/">Kooran</a></li>
-<li><a href="Kot Baliyan/">Kot Baliyan</a></li>
-<li><a href="Kothar/">Kothar</a></li>
-<li><a href="Koyalvao/">Koyalvao</a></li>
-<li><a href="Kumtiya/">Kumtiya</a></li>
-<li><a href="Kundal/">Kundal</a></li>
-<li><a href="Lalpura/">Lalpura</a></li>
-<li><a href="Lalrai/">Lalrai</a></li>
-<li><a href="Latara/">Latara</a></li>
-<li><a href="Lunawa/">Lunawa</a></li>
-<li><a href="Lundara/">Lundara</a></li>
-<li><a href="Malnoo/">Malnoo</a></li>
-<li><a href="Mataji ka Bada/">Mataji ka Bada</a></li>
-<li><a href="Mirgeshwar/">Mirgeshwar</a></li>
-<li><a href="Mokhampura/">Mokhampura</a></li>
-<li><a href="Mundara/">Mundara</a></li>
-<li><a href="Nadiya/">Nadiya</a></li>
-<li><a href="Nana/">Nana</a></li>
-<li><a href="Nichla Goriya/">Nichla Goriya</a></li>
-<li><a href="Padarla/">Padarla</a></li>
-<li><a href="Patriya ki Dhani/">Patriya ki Dhani</a></li>
-<li><a href="Peepla/">Peepla</a></li>
-<li><a href="Perwa/">Perwa</a></li>
-<li><a href="Rampura/">Rampura</a></li>
-<li><a href="Sadra/">Sadra</a></li>
-<li><a href="Sanbharwada/">Sanbharwada</a></li>
-<li><a href="Sela/">Sela</a></li>
-<li><a href="Sena/">Sena</a></li>
-<li><a href="Sesli/">Sesli</a></li>
-<li><a href="Sewari/">Sewari</a></li>
-<li><a href="Shivtalav/">Shivtalav</a></li>
-<li><a href="Thandi Beri/">Thandi Beri</a></li>
-<li><a href="Upla Bhimana/">Upla Bhimana</a></li>
-<li><a href="Urana/">Urana</a></li>
-
-</ul>
+<div id="panchayatList"></div>
 
 <script>
-function filterList() {
-  let input = document.getElementById("search");
-  let filter = input.value.toLowerCase();
-  let ul = document.getElementById("panchayatList");
-  let li = ul.getElementsByTagName("li");
 
-  for (let i = 0; i < li.length; i++) {
-    let a = li[i].getElementsByTagName("a")[0];
-    let textValue = a.textContent || a.innerText;
-    if (textValue.toLowerCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
+const repo = "ERO120BALAJI";
+const project = "Panchayat-voter-list";
+
+fetch(`https://api.github.com/repos/${repo}/${project}/contents`)
+.then(res => res.json())
+.then(data => {
+  const container = document.getElementById("panchayatList");
+
+  data.forEach(folder => {
+    if(folder.type === "dir") {
+
+      const div = document.createElement("div");
+      div.className = "panchayat";
+      div.innerText = folder.name;
+      div.onclick = () => loadWards(folder.name, div);
+
+      const wardDiv = document.createElement("div");
+      wardDiv.className = "wards";
+      wardDiv.id = folder.name;
+
+      container.appendChild(div);
+      container.appendChild(wardDiv);
+    }
+  });
+});
+
+function loadWards(folderName, element) {
+  const wardDiv = document.getElementById(folderName);
+
+  if(wardDiv.innerHTML !== "") {
+    wardDiv.style.display = wardDiv.style.display === "none" ? "block" : "none";
+    return;
+  }
+
+  fetch(`https://api.github.com/repos/${repo}/${project}/contents/${folderName}`)
+  .then(res => res.json())
+  .then(files => {
+    files.forEach(file => {
+      if(file.name.endsWith(".pdf")) {
+        const link = document.createElement("a");
+        link.href = file.download_url;
+        link.target = "_blank";
+        link.innerText = file.name;
+        wardDiv.appendChild(link);
+      }
+    });
+    wardDiv.style.display = "block";
+  });
+}
+
+function filterList() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let items = document.getElementsByClassName("panchayat");
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].innerText.toLowerCase().includes(input)) {
+      items[i].style.display = "block";
     } else {
-      li[i].style.display = "none";
+      items[i].style.display = "none";
     }
   }
 }
+
 </script>
 
 </body>
