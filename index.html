@@ -7,82 +7,95 @@
 body { font-family: Arial; background:#f4f6f9; padding:20px; }
 h1 { text-align:center; }
 input { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; }
-.panchayat { background:#ffffff; padding:10px; margin:6px 0; border-radius:6px; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-.wards { display:none; margin-left:15px; margin-bottom:10px; }
-.wards a { display:block; padding:5px; text-decoration:none; color:blue; }
+a { display:block; padding:10px; margin:6px 0; background:#ffffff; text-decoration:none; color:black; border-radius:6px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+a:hover { background:#e6f2ff; }
 </style>
 </head>
 <body>
 
 <h1>Panchayat Voter List</h1>
+
 <input type="text" id="search" placeholder="Search Panchayat..." onkeyup="filterList()">
 
-<div id="list"></div>
+<div id="list">
+
+<a href="Amliya/">Amliya</a>
+<a href="Barawal/">Barawal</a>
+<a href="Barwa/">Barwa</a>
+<a href="Bedal/">Bedal</a>
+<a href="Beejapur/">Beejapur</a>
+<a href="Beesalpur/">Beesalpur</a>
+<a href="Bera/">Bera</a>
+<a href="Berdi/">Berdi</a>
+<a href="Bhagala Khuna/">Bhagala Khuna</a>
+<a href="Bhandar/">Bhandar</a>
+<a href="Bharla/">Bharla</a>
+<a href="Bhatoond/">Bhatoond</a>
+<a href="Bheemana/">Bheemana</a>
+<a href="Bheetwara/">Bheetwara</a>
+<a href="Boya/">Boya</a>
+<a href="Chamunderi Ranawatan/">Chamunderi Ranawatan</a>
+<a href="Dantiwada/">Dantiwada</a>
+<a href="Dhani/">Dhani</a>
+<a href="Doodni/">Doodni</a>
+<a href="Falna Gaon/">Falna Gaon</a>
+<a href="Gordhanpura/">Gordhanpura</a>
+<a href="Goriya/">Goriya</a>
+<a href="Guralas/">Guralas</a>
+<a href="Joona Beda/">Joona Beda</a>
+<a href="Kakradi/">Kakradi</a>
+<a href="Kheemel/">Kheemel</a>
+<a href="Khetarli/">Khetarli</a>
+<a href="Kolwada/">Kolwada</a>
+<a href="Kooran/">Kooran</a>
+<a href="Kot Baliyan/">Kot Baliyan</a>
+<a href="Kothar/">Kothar</a>
+<a href="Koyalvao/">Koyalvao</a>
+<a href="Kumtiya/">Kumtiya</a>
+<a href="Kundal/">Kundal</a>
+<a href="Lalpura/">Lalpura</a>
+<a href="Lalrai/">Lalrai</a>
+<a href="Latara/">Latara</a>
+<a href="Lunawa/">Lunawa</a>
+<a href="Lundara/">Lundara</a>
+<a href="Malnoo/">Malnoo</a>
+<a href="Mataji ka Bada/">Mataji ka Bada</a>
+<a href="Mirgeshwar/">Mirgeshwar</a>
+<a href="Mokhampura/">Mokhampura</a>
+<a href="Mundara/">Mundara</a>
+<a href="Nadiya/">Nadiya</a>
+<a href="Nana/">Nana</a>
+<a href="Nichla Goriya/">Nichla Goriya</a>
+<a href="Padarla/">Padarla</a>
+<a href="Patriya ki Dhani/">Patriya ki Dhani</a>
+<a href="Peepla/">Peepla</a>
+<a href="Perwa/">Perwa</a>
+<a href="Rampura/">Rampura</a>
+<a href="Sadra/">Sadra</a>
+<a href="Sanbharwada/">Sanbharwada</a>
+<a href="Sela/">Sela</a>
+<a href="Sena/">Sena</a>
+<a href="Sesli/">Sesli</a>
+<a href="Sewari/">Sewari</a>
+<a href="Shivtalav/">Shivtalav</a>
+<a href="Thandi Beri/">Thandi Beri</a>
+<a href="Upla Bhimana/">Upla Bhimana</a>
+<a href="Urana/">Urana</a>
+
+</div>
 
 <script>
-
-const repo = "ERO120BALI";   // 👈 आपका सही username
-const project = "Panchayat-voter-list";
-
-fetch(`https://api.github.com/repos/${repo}/${project}/contents`)
-.then(res => res.json())
-.then(data => {
-
-  const container = document.getElementById("list");
-
-  data.forEach(item => {
-    if(item.type === "dir") {
-
-      const div = document.createElement("div");
-      div.className = "panchayat";
-      div.innerText = item.name;
-
-      const wardDiv = document.createElement("div");
-      wardDiv.className = "wards";
-
-      div.onclick = function() {
-
-        if(wardDiv.innerHTML !== "") {
-          wardDiv.style.display = wardDiv.style.display === "none" ? "block" : "none";
-          return;
-        }
-
-        fetch(item.url)
-        .then(res => res.json())
-        .then(files => {
-          files.forEach(file => {
-            if(file.name.endsWith(".pdf")) {
-              const link = document.createElement("a");
-              link.href = file.download_url;
-              link.target = "_blank";
-              link.innerText = file.name;
-              wardDiv.appendChild(link);
-            }
-          });
-          wardDiv.style.display = "block";
-        });
-
-      };
-
-      container.appendChild(div);
-      container.appendChild(wardDiv);
-    }
-  });
-
-});
-
 function filterList() {
   let input = document.getElementById("search").value.toLowerCase();
-  let items = document.getElementsByClassName("panchayat");
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].innerText.toLowerCase().includes(input)) {
-      items[i].style.display = "block";
+  let links = document.getElementById("list").getElementsByTagName("a");
+  for (let i = 0; i < links.length; i++) {
+    if (links[i].innerText.toLowerCase().includes(input)) {
+      links[i].style.display = "block";
     } else {
-      items[i].style.display = "none";
+      links[i].style.display = "none";
     }
   }
 }
-
 </script>
 
 </body>
