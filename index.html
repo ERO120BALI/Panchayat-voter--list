@@ -7,8 +7,8 @@
 body { font-family: Arial; background:#f4f6f9; padding:20px; }
 h1 { text-align:center; }
 input { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; }
-.panchayat { background:#fff; padding:10px; margin:6px 0; border-radius:6px; cursor:pointer; }
-.wards { margin-left:15px; margin-bottom:10px; display:none; }
+.panchayat { background:#ffffff; padding:10px; margin:6px 0; border-radius:6px; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+.wards { display:none; margin-left:15px; margin-bottom:10px; }
 .wards a { display:block; padding:5px; text-decoration:none; color:blue; }
 </style>
 </head>
@@ -17,59 +17,59 @@ input { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:
 <h1>Panchayat Voter List</h1>
 <input type="text" id="search" placeholder="Search Panchayat..." onkeyup="filterList()">
 
-<div id="panchayatList"></div>
+<div id="list"></div>
 
 <script>
 
-const repo = "ERO120BALAJI";
+const repo = "ERO120BALI";   // 👈 आपका सही username
 const project = "Panchayat-voter-list";
 
 fetch(`https://api.github.com/repos/${repo}/${project}/contents`)
 .then(res => res.json())
 .then(data => {
-  const container = document.getElementById("panchayatList");
 
-  data.forEach(folder => {
-    if(folder.type === "dir") {
+  const container = document.getElementById("list");
+
+  data.forEach(item => {
+    if(item.type === "dir") {
 
       const div = document.createElement("div");
       div.className = "panchayat";
-      div.innerText = folder.name;
-      div.onclick = () => loadWards(folder.name, div);
+      div.innerText = item.name;
 
       const wardDiv = document.createElement("div");
       wardDiv.className = "wards";
-      wardDiv.id = folder.name;
+
+      div.onclick = function() {
+
+        if(wardDiv.innerHTML !== "") {
+          wardDiv.style.display = wardDiv.style.display === "none" ? "block" : "none";
+          return;
+        }
+
+        fetch(item.url)
+        .then(res => res.json())
+        .then(files => {
+          files.forEach(file => {
+            if(file.name.endsWith(".pdf")) {
+              const link = document.createElement("a");
+              link.href = file.download_url;
+              link.target = "_blank";
+              link.innerText = file.name;
+              wardDiv.appendChild(link);
+            }
+          });
+          wardDiv.style.display = "block";
+        });
+
+      };
 
       container.appendChild(div);
       container.appendChild(wardDiv);
     }
   });
+
 });
-
-function loadWards(folderName, element) {
-  const wardDiv = document.getElementById(folderName);
-
-  if(wardDiv.innerHTML !== "") {
-    wardDiv.style.display = wardDiv.style.display === "none" ? "block" : "none";
-    return;
-  }
-
-  fetch(`https://api.github.com/repos/${repo}/${project}/contents/${folderName}`)
-  .then(res => res.json())
-  .then(files => {
-    files.forEach(file => {
-      if(file.name.endsWith(".pdf")) {
-        const link = document.createElement("a");
-        link.href = file.download_url;
-        link.target = "_blank";
-        link.innerText = file.name;
-        wardDiv.appendChild(link);
-      }
-    });
-    wardDiv.style.display = "block";
-  });
-}
 
 function filterList() {
   let input = document.getElementById("search").value.toLowerCase();
